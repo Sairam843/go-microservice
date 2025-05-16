@@ -1,0 +1,34 @@
+directive @auth on FIELD_DEFINITION
+ 
+type APICommonResponse {
+  error: String!
+  message: String!
+  success: Boolean!
+  code: Int!
+}
+ 
+type LoginResponse {
+  common: APICommonResponse!
+  bearerToken: String!
+  refreshToken: String!
+}
+ 
+input NewUserInput {
+  preferredName: String!
+  email: String!
+  password: String!
+}
+ 
+input LoginInput {
+  email: String!
+  password: String!
+}
+ 
+type Mutation {
+  userSignup(input: NewUserInput!): APICommonResponse!
+}
+ 
+type Query {
+  login(input: LoginInput!): LoginResponse!
+}
+ 
