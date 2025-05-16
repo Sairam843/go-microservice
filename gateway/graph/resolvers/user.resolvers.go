@@ -28,4 +28,6 @@ func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResol
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
+// console.log("ghj")
+
 type queryResolver struct{ *Resolver }
