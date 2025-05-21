@@ -1,5 +1,5 @@
 directive @auth on FIELD_DEFINITION
- 
+  # decorator (we can use it in middlewar)
 type APICommonResponse {
   error: String!
   message: String!

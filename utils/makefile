@@ -3,20 +3,21 @@
 GOPATH_BIN := /usr/local/go/bin
 
 protogen:
-	@if [ -z "$(PROTO_DIR)" ]; then \
-		echo "❌ Usage: make protogen PROTO_DIR=./proto"; \
+	@if [ -z "$(PROTO_DIR)" ] || [ -z "$(OUT_DIR)" ]; then \
+		echo "❌ Usage: make protogen PROTO_DIR=./proto OUT_DIR=./some/dir"; \
 		exit 1; \
 	fi
 	@echo "📁 Using PROTO_DIR=$(PROTO_DIR)"
-	@echo "📁 Generating Go code to ./../cache/internal/pb"
+	@echo "📁 Outputting generated Go code to $(OUT_DIR)"
 	protoc \
 		-I$(shell realpath $(PROTO_DIR)) \
-		--plugin=protoc-gen-go=$(GOPATH_BIN)/protoc-gen-go \
-		--plugin=protoc-gen-go-grpc=$(GOPATH_BIN)/protoc-gen-go-grpc \
-		--go_out=./../cache/internal/pb \
-		--go-grpc_out=./../cache/internal/pb \
+		--plugin=protoc-gen-go=$(HOME)/go/bin/protoc-gen-go \
+		--plugin=protoc-gen-go-grpc=$(HOME)/go/bin/protoc-gen-go-grpc \
+		--go_out=$(OUT_DIR) \
+		--go-grpc_out=$(OUT_DIR) \
 		$(shell realpath $(PROTO_DIR))/*.proto
-	@echo "✅ protobuf generated"
+	@echo "✅ protobuf generated in $(OUT_DIR)"
+
 
 setupGrpc:
 	@echo "📦 Installing protoc & Go plugins..."
