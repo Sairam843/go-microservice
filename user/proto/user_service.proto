@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = ".";
+
+import "login.proto";
+import "common_response.proto";
+import "signup.proto";
+
+service user {
+    rpc Signup(NewUserInput) returns (APICommonResponse);
+    rpc Login(LoginInput) returns (LoginResponse);
+}

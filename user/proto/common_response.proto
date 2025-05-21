@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+
+package user;
+
+option go_package = ".";
+
+message APICommonResponse {
+  string error = 1;
+  string message = 2;
+  bool success = 3;
+  int32 code = 4;
+}
